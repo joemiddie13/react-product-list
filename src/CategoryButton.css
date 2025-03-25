@@ -1,0 +1,19 @@
+.category-button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #e0e0e0;
+}
+
+.category-button.selected {
+  background-color: #4a90e2;
+  color: white;
+  border-color: #3a70b2;
+}
