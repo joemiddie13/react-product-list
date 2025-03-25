@@ -1,23 +1,59 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { data, uniqueCategories } from './data.js';
+import CategoryButton from './CategoryButton';
+import ProductCard from './ProductCard';
 
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
+  // Filter products based on selected category
+  const filteredProducts = selectedCategory === 'All' 
+    ? data 
+    : data.filter(product => product.category === selectedCategory);
+  
+  // Count display variables
+  const totalProducts = data.length;
+  const totalCategories = uniqueCategories.length;
+  const displayedProducts = filteredProducts.length;
+  
+  // Calculate total units for displayed products
+  const totalUnits = filteredProducts.reduce((sum, product) => sum + product.units, 0);
+  
+  // Calculate total inventory value for displayed products
+  const totalValue = filteredProducts.reduce((sum, product) => sum + (product.price * product.units), 0);
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Product List</h1>
+        <div className="stats">
+          <p>Total Categories: {totalCategories} | Total Products: {totalProducts}</p>
+          <p>Displayed Products: {displayedProducts} | Total Units: {totalUnits} | Total Value: ${totalValue.toFixed(2)}</p>
+        </div>
       </header>
+      
+      <div className="category-buttons">
+        <CategoryButton 
+          category="All" 
+          onClick={() => setSelectedCategory('All')} 
+          isSelected={selectedCategory === 'All'}
+        />
+        {uniqueCategories.map(category => (
+          <CategoryButton 
+            key={category}
+            category={category} 
+            onClick={() => setSelectedCategory(category)} 
+            isSelected={selectedCategory === category}
+          />
+        ))}
+      </div>
+      
+      <div className="product-list">
+        {filteredProducts.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }
