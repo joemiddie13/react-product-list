@@ -1,5 +1,16 @@
 import data from './data.json';
 
+// Helper function to parse price strings like "$12.07" to numbers
+const parsePrice = (priceStr) => {
+  return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+};
+
+// Process data to convert price strings to numbers for calculations
+const processedData = data.map(item => ({
+  ...item,
+  numericPrice: parsePrice(item.price)
+}));
+
 // 1.1 Using map to extract categories
 const allCategories = data.map(item => item.category);
 
@@ -21,21 +32,21 @@ const categoryObjects = Object.keys(categoryCounts).map(name => ({
 // Stretch Challenge 1: Price list
 const priceList = data.map(item => ({
   name: item.name,
-  price: `$${item.price.toFixed(2)}`
+  price: item.price
 }));
 
 // Stretch Challenge 2: Expensive products
-const expensiveProducts = data.filter(item => item.price > 50);
+const expensiveProducts = processedData.filter(item => item.numericPrice > 50);
 
 // Stretch Challenge 3: Calculate total inventory value
-const totalInventoryValue = data.reduce((total, item) => {
-  return total + (item.price * item.units);
+const totalInventoryValue = processedData.reduce((total, item) => {
+  return total + (item.numericPrice * item.units);
 }, 0);
 
 // Stretch Challenge 4: Total price of products in each category
-const categoryTotals = data.reduce((acc, item) => {
-  const { category, price, units } = item;
-  const itemTotal = price * units;
+const categoryTotals = processedData.reduce((acc, item) => {
+  const { category, numericPrice, units } = item;
+  const itemTotal = numericPrice * units;
   
   acc[category] = (acc[category] || 0) + itemTotal;
   return acc;

@@ -7,6 +7,11 @@ import ProductCard from './ProductCard';
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   
+  // Helper function to parse price strings like "$12.07" to numbers
+  const parsePrice = (priceStr) => {
+    return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+  };
+  
   // Filter products based on selected category
   const filteredProducts = selectedCategory === 'All' 
     ? data 
@@ -21,7 +26,10 @@ function App() {
   const totalUnits = filteredProducts.reduce((sum, product) => sum + product.units, 0);
   
   // Calculate total inventory value for displayed products
-  const totalValue = filteredProducts.reduce((sum, product) => sum + (product.price * product.units), 0);
+  const totalValue = filteredProducts.reduce((sum, product) => {
+    const price = parsePrice(product.price);
+    return sum + (price * product.units);
+  }, 0);
   
   return (
     <div className="App">
