@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import './App.css';
-import { data, uniqueCategories } from './data.js';
+import { data, uniqueCategories, expensiveProducts } from './data.js';
 import CategoryButton from './CategoryButton';
 import ProductCard from './ProductCard';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showExpensive, setShowExpensive] = useState(false);
   
   // Helper function to parse price strings like "$12.07" to numbers
   const parsePrice = (priceStr) => {
     return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
   };
   
-  // Filter products based on selected category
-  const filteredProducts = selectedCategory === 'All' 
+  // Filter products based on selected category and price filter
+  let filteredProducts = selectedCategory === 'All' 
     ? data 
     : data.filter(product => product.category === selectedCategory);
+    
+  // Further filter by price if showExpensive is true
+  if (showExpensive) {
+    filteredProducts = filteredProducts.filter(product => parsePrice(product.price) > 50);
+  }
   
   // Count display variables
   const totalProducts = data.length;
@@ -38,6 +44,17 @@ function App() {
         <div className="stats">
           <p>Total Categories: {totalCategories} | Total Products: {totalProducts}</p>
           <p>Displayed Products: {displayedProducts} | Total Units: {totalUnits} | Total Value: ${totalValue.toFixed(2)}</p>
+        </div>
+      
+        <div className="price-filter">
+          <label className="price-filter-label">
+            <input 
+              type="checkbox" 
+              checked={showExpensive} 
+              onChange={() => setShowExpensive(!showExpensive)} 
+            />
+            Show products over $50 only
+          </label>
         </div>
       </header>
       
