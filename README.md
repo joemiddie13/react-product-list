@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# React Product List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A dynamic product catalog application built with React that demonstrates functional programming concepts with arrays, React components, and state management.
+
+## Project Overview
+
+This application showcases how to use `map`, `filter`, and `reduce` to transform and display product data. Users can filter products by category and price, while viewing real-time statistics about the displayed items.
+
+![React Product List Screenshot](https://picsum.photos/800/400)
+
+## Features
+
+- **Category Filtering**: Filter products by selecting different category buttons
+- **Price Filtering**: Toggle to show only products over $50
+- **Dynamic Statistics**: View total count of products, units, and inventory value
+- **Responsive Design**: Works on both desktop and mobile devices
+
+## Technical Implementation
+
+This project demonstrates:
+
+- **Functional Programming**: Using `map`, `filter`, and `reduce` for data transformations
+- **React Components**: Creating reusable components for category buttons and product cards
+- **State Management**: Managing application state with React hooks
+- **Component Styling**: CSS styling for a polished user interface
+- **Dynamic Rendering**: Conditional rendering based on user selections
+
+## Component Structure
+
+- **App**: Main component that manages state and renders child components
+- **CategoryButton**: Reusable button component for category filtering
+- **ProductCard**: Card component to display product information
+
+## Data Processing
+
+The application processes product data in several ways:
+
+- Extract unique categories from the product list
+- Count products in each category
+- Calculate total inventory value
+- Filter products based on selected categories and price thresholds
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm (comes with Node.js)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/react-product-list.git
+   cd react-product-list
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- `npm start`: Runs the app in development mode
+- `npm test`: Launches the test runner
+- `npm run build`: Builds the app for production
+- `npm run eject`: Ejects from Create React App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Testing
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application includes unit tests for all components:
+- App component tests
+- CategoryButton component tests
+- ProductCard component tests
 
-### `npm test`
+Run tests with:
+```bash
+npm test
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## License
 
-### `npm run build`
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Acknowledgments
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+- Product data generated for educational purposes
