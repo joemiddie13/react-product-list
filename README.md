@@ -6,8 +6,6 @@ A dynamic product catalog application built with React that demonstrates functio
 
 This application showcases how to use `map`, `filter`, and `reduce` to transform and display product data. Users can filter products by category and price, while viewing real-time statistics about the displayed items.
 
-![React Product List Screenshot](https://picsum.photos/800/400)
-
 ## Features
 
 - **Category Filtering**: Filter products by selecting different category buttons
