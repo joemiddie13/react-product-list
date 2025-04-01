@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './App.css';
-import { data, uniqueCategories, expensiveProducts } from './data.js';
+import { data, uniqueCategories } from './data.js';
 import CategoryButton from './CategoryButton';
 import ProductCard from './ProductCard';
 
@@ -13,29 +13,38 @@ function App() {
     return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
   };
   
-  // Filter products based on selected category and price filter
-  let filteredProducts = selectedCategory === 'All' 
-    ? data 
-    : data.filter(product => product.category === selectedCategory);
+  // Using useMemo to optimize the filtering of products
+  const filteredProducts = useMemo(() => {
+    let products = selectedCategory === 'All' 
+      ? data 
+      : data.filter(product => product.category === selectedCategory);
+      
+    // Further filter by price if showExpensive is true
+    if (showExpensive) {
+      products = products.filter(product => parsePrice(product.price) > 50);
+    }
     
-  // Further filter by price if showExpensive is true
-  if (showExpensive) {
-    filteredProducts = filteredProducts.filter(product => parsePrice(product.price) > 50);
-  }
+    return products;
+  }, [selectedCategory, showExpensive, data]);
   
   // Count display variables
   const totalProducts = data.length;
   const totalCategories = uniqueCategories.length;
   const displayedProducts = filteredProducts.length;
   
-  // Calculate total units for displayed products
-  const totalUnits = filteredProducts.reduce((sum, product) => sum + product.units, 0);
-  
-  // Calculate total inventory value for displayed products
-  const totalValue = filteredProducts.reduce((sum, product) => {
-    const price = parsePrice(product.price);
-    return sum + (price * product.units);
-  }, 0);
+  // Using useMemo to calculate totals only when filteredProducts changes
+  const { totalUnits, totalValue } = useMemo(() => {
+    // Calculate total units for displayed products
+    const units = filteredProducts.reduce((sum, product) => sum + product.units, 0);
+    
+    // Calculate total inventory value for displayed products
+    const value = filteredProducts.reduce((sum, product) => {
+      const price = parsePrice(product.price);
+      return sum + (price * product.units);
+    }, 0);
+    
+    return { totalUnits: units, totalValue: value };
+  }, [filteredProducts]);
   
   return (
     <div className="App">
