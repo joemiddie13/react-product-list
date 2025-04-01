@@ -3,10 +3,13 @@ import './App.css';
 import { data, uniqueCategories } from './data.js';
 import CategoryButton from './CategoryButton';
 import ProductCard from './ProductCard';
+import Cart from './Cart';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showExpensive, setShowExpensive] = useState(false);
+  const [shoppingCart, setShoppingCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
   
   // Helper function to parse price strings like "$12.07" to numbers
   const parsePrice = (priceStr) => {
@@ -46,6 +49,29 @@ function App() {
     return { totalUnits: units, totalValue: value };
   }, [filteredProducts]);
   
+  // Process and enhance products with numeric price for cart operations
+  const processedProducts = useMemo(() => {
+    return data.map(product => ({
+      ...product,
+      numericPrice: parsePrice(product.price)
+    }));
+  }, [data]);
+  
+  // Add product to cart
+  const addToCart = (product) => {
+    // Find the processed product with numeric price
+    const productToAdd = processedProducts.find(p => p.id === product.id);
+    setShoppingCart([...shoppingCart, productToAdd]);
+  };
+  
+  // Calculate cart totals
+  const cartTotals = useMemo(() => {
+    const itemCount = shoppingCart.length;
+    const totalCost = shoppingCart.reduce((sum, item) => sum + item.numericPrice, 0);
+    
+    return { itemCount, totalCost };
+  }, [shoppingCart]);
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -54,7 +80,16 @@ function App() {
           <p>Total Categories: {totalCategories} | Total Products: {totalProducts}</p>
           <p>Displayed Products: {displayedProducts} | Total Units: {totalUnits} | Total Value: ${totalValue.toFixed(2)}</p>
         </div>
-      
+        
+        <div className="cart-button-container">
+          <button 
+            className="cart-button"
+            onClick={() => setShowCart(!showCart)}
+          >
+            {showCart ? 'Hide Cart' : `View Cart (${cartTotals.itemCount})`}
+          </button>
+        </div>
+        
         <div className="price-filter">
           <label className="price-filter-label">
             <input 
@@ -66,6 +101,12 @@ function App() {
           </label>
         </div>
       </header>
+      
+      {showCart && (
+        <div className="cart-container">
+          <Cart cartItems={shoppingCart} />
+        </div>
+      )}
       
       <div className="category-buttons">
         <CategoryButton 
@@ -85,7 +126,11 @@ function App() {
       
       <div className="product-list">
         {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard 
+            key={product.id} 
+            product={product} 
+            onAddToCart={() => addToCart(product)}
+          />
         ))}
       </div>
     </div>

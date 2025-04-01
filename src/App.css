@@ -46,3 +46,34 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* New styles for cart functionality */
+.cart-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.cart-container {
+  margin: 20px 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .product-list {
+    justify-content: space-around;
+  }
+  
+  .category-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category-buttons button {
+    margin: 5px 0;
+    width: 80%;
+  }
+}

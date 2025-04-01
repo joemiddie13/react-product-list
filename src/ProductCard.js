@@ -1,12 +1,8 @@
 import React from 'react';
 import './ProductCard.css';
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
   const { name, category, price, rating, description, units } = product;
-  
-  // Parse the price string to remove the dollar sign and convert to number
-  // Using a regex to remove non-numeric characters except decimal point
-  const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ''));
   
   // Generate star rating display
   const stars = Array(5).fill(0).map((_, index) => (
@@ -23,6 +19,13 @@ function ProductCard({ product }) {
         <p className="units">Units Available: {units}</p>
       </div>
       <p className="description">{description}</p>
+      
+      <button 
+        className="add-to-cart-button"
+        onClick={onAddToCart}
+      >
+        Add to Cart
+      </button>
     </div>
   );
 }

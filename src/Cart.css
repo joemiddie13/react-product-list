@@ -1,0 +1,125 @@
+.cart {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+.cart-items {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-name {
+  flex: 2;
+  font-weight: 500;
+}
+
+.item-price {
+  flex: 1;
+  color: #e63946;
+  text-align: right;
+}
+
+.item-quantity {
+  flex: 1;
+  text-align: right;
+  color: #2a9d8f;
+}
+
+.item-total {
+  flex: 1;
+  text-align: right;
+  font-weight: 500;
+  color: #333;
+}
+
+.cart-footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #ddd;
+  padding-top: 15px;
+}
+
+.cart-total {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkout-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #3a70b2;
+}
+
+/* Styling for the cart button in App.js */
+.cart-button-container {
+  margin: 10px 0;
+}
+
+.cart-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+  background-color: #3a70b2;
+}
+
+/* Add to cart button styling for ProductCard.js */
+.add-to-cart-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #388e3c;
+}
